@@ -26,6 +26,11 @@ namespace MSApiDAL.Repository
              await _context.collection.InsertManyAsync(documents);
         }
 
+        public async void Upsert(TEntity document)
+        {
+            await _context.collection.InsertOneAsync(document);
+        }
+
         public async Task<List<TEntity>> Get(FilterDefinition<TEntity> filter)
         {
             FindOptions<TEntity> options = new FindOptions<TEntity> { Limit = 10 };
@@ -37,6 +42,11 @@ namespace MSApiDAL.Repository
         public void Save(TEntity entity)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<UpdateResult> Update(FilterDefinition<TEntity> filter, UpdateDefinition<TEntity> update)
+        {
+            return await _context.collection.UpdateOneAsync(filter, update);
         }
 
         public async Task<DeleteResult> Delete(FilterDefinition<TEntity> filter)

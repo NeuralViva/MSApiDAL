@@ -8,6 +8,8 @@ namespace MSApiDAL.Repository
     {
         Task<List<TEntity>> Get(FilterDefinition<TEntity> filter);
         void Upsert(List<TEntity> documents);
+        void Upsert(TEntity document);
         Task<DeleteResult> Delete(FilterDefinition<TEntity> filter);
+        Task<UpdateResult> Update(FilterDefinition<TEntity> filter, UpdateDefinition<TEntity> update);
     }
 }
